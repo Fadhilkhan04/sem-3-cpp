@@ -21,6 +21,7 @@ void deleted(int mynum[], int n, int x)
   cout << "current array is" << endl;
   for (i = 0; i < n; i++)
     cout << mynum[i] << " ";
+  cout << endl;
 }
 
 void insert(int mynum[], int n, int num, int pos)
@@ -63,6 +64,9 @@ int main()
   cin >> x;
 
   deleted(mynum, n, x);
+
+  cout << "fadhilkhan" << endl;
+  cout << "220071601060" << endl;
 
   return 0;
 }
