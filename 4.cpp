@@ -98,6 +98,9 @@ int main()
     }
     else if (ch == 3)
     {
+      cout << "Fadhilkhan" << endl;
+      cout << "RRN : 220071601060" << endl;
+      cout << "B.Tech CSE - A" << endl;
       break;
     }
     else
