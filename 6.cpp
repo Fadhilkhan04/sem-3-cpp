@@ -1,7 +1,9 @@
 #include <iostream>
 using namespace std;
 
-void enqueue(int queue[], int n, int size, int rear, int front)
+int rear = -1;
+int front = 0;
+void enqueue(int queue[], int n, int size)
 {
   if (rear == size - 1)
   {
@@ -9,13 +11,14 @@ void enqueue(int queue[], int n, int size, int rear, int front)
   }
   else
   {
+    rear++;
     queue[rear] = n;
   }
 }
 
-void dequeue(int queue[], int size, int front, int rear)
+void dequeue(int queue[], int size)
 {
-  if (front == -1 || front > rear)
+  if (rear == -1)
   {
     cout << "queue underflow";
   }
@@ -23,15 +26,28 @@ void dequeue(int queue[], int size, int front, int rear)
   {
     cout << "the element deleted from the queue is :" << queue[front] << endl;
     front++;
+
+    if (front > rear)
+    {
+      rear = -1;
+      front = 0;
+    }
   }
 }
-void peek(int queue[], int front)
+void peek(int queue[])
 {
-  cout << "the element which is at front container:" << queue[front] << endl;
+  if (rear == -1)
+  {
+    cout << "queue is empty" << endl;
+  }
+  else
+  {
+    cout << "the element which is at front container :" << queue[front] << endl;
+  }
 }
-void display(int queue[], int rear, int front)
+void display(int queue[])
 {
-  if (front == -1)
+  if (rear == -1)
   {
     cout << "queue is empty please enter elements." << endl;
   }
@@ -48,8 +64,6 @@ void display(int queue[], int rear, int front)
 int main()
 {
   int size, ch, n;
-  int rear = -1;
-  int front = 0;
   cout << "Enter the size of the Queue:" << endl;
   cin >> size;
   int queue[size];
@@ -70,24 +84,22 @@ int main()
     {
       cout << "Enter the element you want to push in the queue:" << endl;
       cin >> n;
-      rear++;
-      enqueue(queue, n, size, rear, front);
+      enqueue(queue, n, size);
       continue;
     }
     else if (ch == 2)
     {
-      dequeue(queue, size, front, rear);
-      front++;
+      dequeue(queue, size);
       continue;
     }
     else if (ch == 3)
     {
-      peek(queue, front);
+      peek(queue);
       continue;
     }
     else if (ch == 4)
     {
-      display(queue, rear, front);
+      display(queue);
       continue;
     }
     else if (ch == 5)
