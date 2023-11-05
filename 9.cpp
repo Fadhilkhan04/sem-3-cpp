@@ -16,36 +16,140 @@ public:
   }
 };
 
-node *insert(node *&root, int val)
+void insert(node *&root, int val)
 {
   node *n = new node(val);
+  node *current;
+  node *parent;
 
-  n->left = NULL;
-  n->right = NULL;
+  // if tree is empty
 
   if (root == NULL)
   {
     root = n;
   }
-  else if (val <= root->data)
-  {
-    root->left = insert(root->left, val);
-  }
   else
   {
-    root->right = insert(root->right, val);
+    current = root;
+    parent = NULL;
+
+    while (1)
+    {
+      parent = current;
+
+      // go to left of tree
+      if (val < parent->data)
+      {
+        current = current->left;
+        // insert to left
+
+        if (current == NULL)
+        {
+          parent->left = n;
+          return;
+        }
+      } // go to right of tree
+      else
+      {
+        current = current->right;
+        // insert to right
+        if (current == NULL)
+        {
+          parent->right = n;
+          return;
+        }
+      }
+    }
   }
-  return root;
 }
+
+void inorder(node *&root)
+{
+  if (root == NULL)
+  {
+    return;
+  }
+  inorder(root->left);
+  cout << root->data << " ";
+  inorder(root->right);
+}
+
+void preorder(node *&root)
+{
+  if (root == NULL)
+  {
+    return;
+  }
+  cout << root->data << " ";
+  preorder(root->left);
+  preorder(root->right);
+}
+void postorder(node *&root)
+{
+  if (root == NULL)
+  {
+    return;
+  }
+  postorder(root->left);
+  postorder(root->right);
+  cout << root->data << " ";
+}
+
+// main area
 
 int main()
 {
 
-  int val;
+  int ch, val;
   node *root = NULL;
-  root = insert(root, 10);
-  cout << "hello";
-  root = insert(root, 15);
-  cout << "hello";
-  root = insert(root, 20);
+  while (true)
+  {
+    cout << endl;
+    cout << "----------- BST Operation -----------" << endl;
+    cout << "1. Insertion." << endl;
+    cout << "2. Inorder traversal." << endl;
+    cout << "3. Preorder traversal." << endl;
+    cout << "4. postorder traversal" << endl;
+    cout << "5. exit" << endl;
+    cout << "Enter choice: ";
+    cin >> ch;
+
+    if (ch == 1)
+    {
+      cout << "enter the value:";
+      cin >> val;
+      insert(root, val);
+      continue;
+    }
+    else if (ch == 2)
+    {
+      inorder(root);
+      continue;
+    }
+    else if (ch == 3)
+    {
+      preorder(root);
+      continue;
+    }
+    else if (ch == 4)
+    {
+      postorder(root);
+      continue;
+    }
+    else if (ch == 5)
+    {
+      cout << "Fadhilkhan" << endl;
+      cout << "RRN : 220071601060" << endl;
+      cout << "B.Tech CSE - A" << endl;
+      break;
+    }
+    else
+    {
+      cout << endl
+           << "Invalid choice try again." << endl
+           << endl;
+      continue;
+    }
+  }
+  return 0;
 }
