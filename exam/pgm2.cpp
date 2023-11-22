@@ -5,7 +5,7 @@ int main()
 {
   string text;
   int i;
-  cout << "enter a text :" << endl;
+  cout << "enter a  text :" << endl;
   cin >> text;
   cout << text[0];
 
